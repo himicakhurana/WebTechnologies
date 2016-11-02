@@ -1,0 +1,132 @@
+<html>
+
+<head>
+    <title>Radio Stations</title>
+    <!--
+<BODY>
+This is for USC disclaimer
+</BODY>
+-->
+    <script>
+        function generateHTML(xmlDoc) {
+            ELEMENT_NODE = 1; // MS parser doesn't define Node.ELEMENT_NODE
+            root = xmlDoc.DocumentElement;
+            html_text = "<html><head><title>List of Stations</title></head><body>";
+            html_text += "<table border='2'>";
+            rows = xmlDoc.getElementsByTagName("Row");
+            headers = xmlDoc.getElementsByTagName("Header");
+            rowNodeList = headers.item(0).childNodes;
+        
+            html_text += "<tbody>";
+            html_text += "<tr>";
+            x = 0;
+            y = 0;
+            // output the headers
+            for (i = 0; i < rowNodeList.length; i++) {
+                if (rowNodeList.item(i).nodeType == ELEMENT_NODE) {
+                    header = getVal(rowNodeList.item(i));
+                    
+                    html_text += "<th>" + header + "</th>";
+                }
+            }
+            html_text += "</tr>";
+            // output out the values
+            for (i = 0; i < rows.length; i++) //do for all rows
+            {
+                rowNodeList = rows.item(i).childNodes; //get properties of a plane
+                html_text += "<tr>"; //start a new row of the output table
+                for (j = 0; j < rowNodeList.length; j++) {
+                    if (rowNodeList.item(j).nodeType == ELEMENT_NODE) {
+                        if (rowNodeList.item(j).nodeName == "Logo") { //handle images separately
+                            html_text += "<td><img src='" + getVal(rowNodeList.item(j)) + "' width='" + "100" + "' height='" + "100" + "'></td>";
+                        }  else     {                 if (rowNodeList.item(j).nodeName == "Location") { 
+                            locs=rowNodeList.item(j).childNodes;
+                          
+                            liststart="<ul>"
+                            for(p=0;p<locs.length;p++){
+                                                    if (locs.item(p).nodeType == ELEMENT_NODE) {
+
+                                liststart+="<li>"+getVal(locs.item(p))+"</li>";
+                                                    }
+                            }
+                            liststart+="</ul>"
+                            if(locs.length>0){
+                                                            html_text += "<td>" + liststart + "</td>";
+
+                            }
+                            
+                            
+                            
+                            
+                        } else {
+                            html_text += "<td>" + getVal(rowNodeList.item(j)) + "</td>";
+                        }
+                    }}
+                }
+                html_text += "</tr>";
+            }
+            html_text += "</tbody>";
+            html_text += "</table>";
+            html_text += "</body></html>";
+        }
+function getVal(x){
+    if(x!=undefined||x!=null){
+       if(x.firstChild!=undefined||x.firstChild!=null){
+              if(x.firstChild.nodeValue!=undefined||x.firstChild.nodeValue!=null){
+               return x.firstChild.nodeValue;
+              }
+
+       }
+    }
+    return "NA";
+}
+        
+        
+        function viewXML(what) {
+            var URL = what.URL.value;
+
+            function loadXML(url) {
+                if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else { // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.open("GET", url, false);
+                xmlhttp.send();
+                xmlDoc = xmlhttp.responseXML;
+                return xmlDoc;
+            }
+            xmlDoc = loadXML(URL);
+            if (window.ActiveXObject) //if IE, simply execute script (due to async prop).
+            {
+                if (xmlDoc.parseError.errorCode != 0) {
+                    var myErr = xmlDoc.parseError;
+                    generateError(xmlDoc);
+                    hWin = window.open("", "Error", "height=300,width=340");
+                    hWin.document.write(html_text);
+                } else {
+                    generateHTML(xmlDoc);
+                    hWin = window.open("", "List of Radio Stations", "height=1000,width=1500");
+                    hWin.document.write(html_text);
+                }
+            } else //else if FF, execute script once XML object has loaded
+            {
+                xmlDoc.onload = generateHTML(xmlDoc);
+                    hWin = window.open("", "List of Radio Stations", "height=1000,width=1500");
+                hWin.document.write(html_text);
+            }
+            hWin.document.close();
+        }
+    </script>
+</head>
+
+<body>
+    <h1>View the Radio Stations </h1> Enter xml file and click on Submit
+    <form name="myform" method="POST" id="location">
+        <input type="text" name="URL" maxlength="255" size="100" value="stationslist.xml" />
+        <br />
+        <input type="button" name="submit" value="Submit Query" onClick="viewXML(this.form)" />
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Airbus</title>
+</head>
+
+<body>
+<script type="text/javascript">
+xmlhttp=new XMLHttpRequest();
+xmlhttp.open("GET","airbus.xml",false);
+xmlhttp.send();
+xmlDoc=xmlhttp.responseXML;
+
+planes=xmlDoc.getElementsByTagName("aircraft");
+for(i=0;i<planes.length;i++){
+document.write(planes.item(i).getElementsByTagName("Airbus")[0].childNodes[0].nodeValue);
+document.write("</br>");
+document.write(planes.item(i).getElementsByTagName("seats")[0].childNodes[0].nodeValue);
+document.write("</br>");
+}
+</script>
+</body>
+</html>

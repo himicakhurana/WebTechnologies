@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Stock Market Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/mycss.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="fb-root"></div>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1782721468617422',
+                xfbml: true,
+                version: 'v2.5'
+            });
+        };
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="jumbotron vertical-center">
+
+        <div class="container container-fluid2">
+
+
+            <form class="row  get-quote-form" role="form">
+                <h2 align="center">Stock Market Search</h2>
+                <div class="form-group col-xs-12 col-sm-4 col-md-3">
+                    <label for="search_symbol" class="required control-label search-label">Enter stock name or symbol:</label>
+
+
+                </div>
+                <div class="form-group col-xs-12 col-sm-4 col-md-6 ui-widget">
+                    <input id="search_symbol" required placeholder="Apple Inc or AAPL" />
+
+                </div>
+                <div class="form-group col-xs-12 col-sm-4 col-md-3">
+
+                    <button type="submit" class="btn btn-primary" id="getquote">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>Get Quote</button>
+                    <button type="reset" class="btn btn-default" id="reset">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true" id="clear"></span>Clear</button>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <span id="errorMsg"></span>
+
+
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+
+                    <label>Powered by:</label>
+                    <a href="http://dev.markitondemand.com/MODApis/" target="_blank">
+                        <img class="modlogo" src="images/mod-logo.png" alt="image-logo" />
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+        <hr style.color="white">
+        <!-- <div class="container-fluid">
+
+        <div class="fav-head row">
+            <div class="col-xs-12">
+                <div class="fav-heading">
+                    <h5>Favorite List</h5></div>
+                <div class="button-set">
+                    <label for="autorefresh" class=" control-label">Autofresh:</label>
+
+                    <input type="checkbox" name="autorefresh" checked data-toggle="toggle"> &nbsp;
+                    <div class="btn-group2">
+                        <button type="button" class="btn btn-default">Clear</button>
+                        <button type="button" class="btn btn-default">&gt;</button>
+
+                        
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+
+        <div class="container container-fluid2">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="true">
+                <!-- Indicators -->
+
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <div class="outline-table">
+                            <table class="table favtable">
+                                <tr>
+                                    <td class="fav">
+                                        <h5 class="fav-heading" align="left">Favorite List</h5>
+                                    </td>
+                                    <td class="fav">
+                                        <div class="button-set">
+                                            <label for="autorefresh" class="control-label autorefresh visible-lg-inline">Autorefresh:</label>
+                                            <span id="tadaa">
+                                            <input type="checkbox" name="autorefresh" id="autorefresh" data-toggle="toggle" title="Auto Refresh Data"> &nbsp;
+                                      </span>
+                                            <div class="btn-group2">
+                                                <button type="button" class="btn btn-default" id="refr" title="Refresh Stock Information">
+                                                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                                                <button type="button" id="btn-next" class="carousel-control btn btn-default" href="#myCarousel" role="button" data-slide="next" disabled title="Display Stock Information">
+                                                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+
+                                                <!--      <a class="carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                          &gt;
+
+                                            </a>-->
+
+
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="outline-table2  table-responsive">
+
+                                <!--
+                            <div class="inline-table">
+-->
+                                <table class="table table-striped" id="favorites">
+
+                                    <tr>
+                                        <td nowrap>Symbol</td>
+                                        <td nowrap>Company Name</td>
+                                        <td nowrap>Stock Price</td>
+                                        <td nowrap>Change(Change Percent)</td>
+                                        <td nowrap>Market Cap</td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <!--
+                            </div>
+-->
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="item">
+                        <div class="outline-table">
+
+                            <table class="favtable2">
+                                <tr>
+                                    <td class="fav2">
+                                        <div class="button-second">
+
+                                            <div class="btn-group2">
+                                                <button type="button" class="carousel-control btn btn-default" href="#myCarousel" role="button" data-slide="next"> <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="fav2">
+                                        <h5 class="fav-heading" align="center">Stock details</h5>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+
+
+
+
+
+                            <div class="container" id="tab-render">
+
+
+
+
+
+                                <ul class="nav nav-pills">
+                                    <li class="active">
+                                        <a data-toggle="tab" data-info="tab" href="#home"> <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+                                            <span class="hidden-xs">Current Stock</span>
+                                            <span class="visible-xs-inline">Stock</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" data-info="tab" href="#menu1"> <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                                            <span class="hidden-xs">Historical Charts</span>
+                                            <span class="visible-xs-inline">Charts</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" data-info="tab" href="#menu2"> <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                                            <span class="hidden-xs">News Feeds</span>
+                                            <span class="visible-xs-inline">News</span>
+
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <hr>
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane fade in active">
+                                    <div class="container container-fluid2">
+                                        <div class="row">
+                                            <h5 class="st-details">Stock details</h5>
+
+
+
+                                            <div class="button-set2">
+                                                <!--
+                                                    <input type="button" value="" class="btn btn-default sign-in-facebook"  style="margin-top:2px; margin-bottom:2px;">
+-->
+
+
+                                                <button type="button" data-symbol="" class="btn btn-default fb-logo" id="fb-share"><img src="http://i.stack.imgur.com/e2S63.png" width="100%" height="43" alt="fb-logo" /></button>
+
+
+                                                <button type="button" class="btn btn-default" id="addFav"><span class="glyphicon glyphicon-star white-star" id="star"></span>
+                                                    <!--<img src="images/addfav_2.png" id="fav_img" alt="add-fav" width="100%">--></button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+
+
+                                                <table class="table table-striped" id="details">
+                                                </table>
+                                            </div>
+                                            <div class="col-sm-6">
+
+                                                <div class="button-set">
+
+                                                    <img id="yahoochart" src="http://chart.finance.yahoo.com/t?s=AAPL&lang=en-US&width=400&height=300" alt="stock-chart" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="menu1" class="tab-pane fade">
+
+                                    <div id="container" class="high-width"></div>
+
+                                </div>
+                                <div id="menu2" class="tab-pane fade">
+                                    <h3 align="center" id="news-info">News</h3>
+                                    <ul id="news">
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Left and right controls -->
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="js/stocks.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+</body>
+
+</html>

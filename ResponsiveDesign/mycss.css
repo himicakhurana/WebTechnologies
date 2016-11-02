@@ -1,0 +1,474 @@
+body {
+    background-color: #2e6da4;
+    border-color: #2e6da4;
+    margin: auto auto;
+    max-width: 980px;
+}
+
+.modlogo {
+    display: inline;
+    height: 40px;
+    width: 105px;
+    margin: auto;
+}
+
+input:required:focus {
+    -webkit-box-shadow: 0 0 0.4em 0.3em rgba(81, 203, 238, 1);
+    box-shadow: 0 0 0.4em 0.3em rgba(81, 203, 238, 1);
+    outline: none;
+}
+
+input:invalid {
+    /*
+    border: 4px solid rgba(81, 203, 238, 1);
+*/
+    box-shadow: none;
+    outline: none;
+}
+
+.container-fluid2 {
+    padding-bottom: 25px;
+    margin-top: 10px;
+    margin: auto auto;
+    background-color: white;
+    border-color: #2e6da4;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.form-group .required:after {
+    content: "*";
+    color: red;
+    outline: none;
+}
+
+#search_symbol {
+    width: 100%;
+}
+
+.search-label {
+    padding: -5px;
+}
+
+button {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.fav-heading {}
+
+h5 {
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.button-set {
+    height: auto;
+    position: relative;
+    float: right;
+}
+
+.button-second {
+    position: relative;
+    float: left;
+}
+
+.button-set img {
+    width: 100%;
+}
+
+.fav-head {
+    margin-top: 30px;
+    padding-top: 20px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #EFEFEF;
+    border: black;
+}
+
+.outline-table {
+    height: auto;
+    padding: 10px 10px 10px 10px;
+    margin: 0;
+    padding: 0;
+    border: 2px solid #CFCFCF;
+    border-width: medium;
+    margin-top: 20px;
+}
+
+.outline-table2 {
+    height: auto;
+    /*
+    padding: 20px, 20px, 20px, 20px;
+*/
+    margin-top: 0;
+    width: 98%;
+    margin-left: 8px;
+    margin-right: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.outline-table2::-webkit-scrollbar {
+    display: none;
+}
+
+.favtable {
+    table-layout: auto;
+    border: none;
+    width: 100%;
+    display: inline-block;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 100%;
+}
+
+.favtable2 {
+    table-layout: auto;
+    border: none;
+    width: 100%;
+    display: inline-block;
+    padding-top: 0px;
+    height: 100%;
+    padding-bottom: 0px;
+}
+
+.autorefresh {
+    /*
+    display: inline-block !important;
+*/
+}
+
+
+/*.inline-table {
+    table-layout: auto;
+    border: none;
+    width: 100%;
+    overflow: scroll !important;
+}*/
+
+#favourites td {
+    white-space: nowrap;
+}
+
+.stock-details {
+    width: 100%;
+    padding: 5px 5px 5px 5px;
+}
+
+.favtable td {
+    line-height: 1.8em !important;
+    margin: 0;
+    padding: 5px !important;
+    padding-bottom: 0px;
+    height: 100% !important;
+    width: 100%;
+    /*
+    align-content: center;
+*/
+    white-space: nowrap;
+    background-color: #DFDFDF;
+    vertical-align: middle !important;
+}
+
+.favtable2 td:not(:first-child) {
+    line-height: 1.8em !important;
+    margin: 0;
+    padding: 5px !important;
+    height: 100% !important;
+    padding-bottom: 0px;
+    /*
+    align-content: center;
+*/
+    width: 100%;
+    white-space: nowrap;
+    background-color: #DFDFDF;
+    vertical-align: middle !important;
+}
+
+.favtable2 td:first-child {
+    line-height: 1.8em !important;
+    margin: 0;
+    padding: 5px !important;
+    height: 100% !important;
+    padding-bottom: 0px;
+    /*
+    align-content: center;
+*/
+    white-space: nowrap;
+    background-color: #DFDFDF;
+    vertical-align: middle !important;
+}
+
+.fav2 {
+    /*
+    width: 100%;
+*/
+}
+
+.btn-group2 {
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+#tabs-1 {
+    font-size: 14px;
+}
+
+.carousel-control {
+    position: relative;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.jumbotron.vertical-center {
+    background-color: #2e6da4;
+    padding: 8px 8px 8px 8px;
+    /* Remove the default bottom margin of .jumbotron */
+}
+
+.vertical-center {
+    min-height: 100%;
+    /* Fallback for vh unit */
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.carousel-control {
+    width: auto;
+    font-size: 14px;
+    color: black;
+    height: auto;
+}
+
+.btn-left {
+    padding: 5px 5px 5px 5px;
+}
+
+.st-details {
+    display: inline-block;
+    padding-left: 15px;
+}
+
+body table {
+    /*  border-left-width: thick;
+                            border-right-width: thick;
+                            border-top-width: thick;
+                            border-bottom-width: thick;*/
+    border: 2px solid #CFCFCF;
+    border-width: medium;
+    border-spacing: 0;
+}
+
+.toggle-off-fav {
+    border-radius: 5px;
+    background-image: url("../images/add_fav2.png");
+}
+
+.toggle-on-fav {
+    border-radius: 5px;
+    background-image: url("../images/add_fav1.png");
+}
+
+.nav {
+    padding-top: 20px;
+}
+
+#news li {
+    border-radius: 5px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fcfff4+0,dfe5d7+40,b3bead+100;Wax+3D+%233 */
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+0,596a72+100;Grey+3D+%231 */
+    background: -webkit-linear-gradient(bottom, rgba(206, 220, 231, 0), rgba(255, 0, 0, 1));
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(top, rgba(206, 220, 231, 0), rgba(206, 220, 231, 1));
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom, rgba(206, 220, 231, 0), rgba(255, 0, 0, 1));
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to top, rgba(206, 220, 231, 0), rgba(206, 220, 231, 1));
+    /* Standard syntax (must be last) */
+    /* IE6-9 */
+    border: 2px solid #CFCFCF;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-width: medium;
+    margin: 20px 0;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 15px 15px 15px 15px;
+}
+
+#details {
+    border: none;
+}
+
+#favorites {
+    table-layout: auto;
+    border: none;
+    /*
+    -webkit-overflow-scrolling: touch;
+*/
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 100%;
+}
+
+#favorites td {
+    padding-left: 5px!important;
+    padding-right: 5px!important;
+}
+
+#details td td:not(:first-child) {
+    word-wrap: break-word;
+    width: 70%;
+}
+
+#news {
+    list-style: none;
+    margin: auto auto;
+    padding: 0;
+}
+
+#news li p {
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+#news li .news-detail {
+    font-weight: bold;
+}
+
+#errorMsg {
+    color: red;
+}
+
+#containerw {
+    border: none;
+    display: inline-block;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 100%;
+    max-width: 100%;
+}
+
+#containerx {
+    height: auto;
+    padding: 10px 10px 10px 10px;
+    margin: 0;
+    padding: 0;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 100%;
+}
+
+.button-set2 {
+    display: inline-block;
+    float: right;
+    margin-right: 15px;
+    /*  margin-top: 0px;
+    position: absolute;
+    top: 0px !important;
+    right: 10px;
+    height: auto;*/
+    /* margin: -100px 0 0 0;
+    height: 200px;*/
+}
+
+
+/*
+.highcharts-container{width:100% !important; height:100% !important;}
+*/
+
+.high-width {
+    width: auto;
+}
+
+.chart-wrapper {
+    position: relative;
+    padding-bottom: 40%;
+}
+
+.chart-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.nav li a {
+    padding: 10px 10px !important;
+    font-size: 14px;
+}
+
+.up {
+    color: green;
+}
+
+.down {
+    color: red;
+}
+
+button img {
+    width: 100%; // replace with actual width
+    height: 100%;
+    /**/
+    ; // replace with actual height
+    display: inline-block;
+}
+
+.fb-logo {
+    padding: 0px 0px;
+}
+
+#addFav {
+    padding: 0px 0px;
+    height: 45px;
+    width: 50px;
+    background-color: #e6e6e6;
+}
+
+.yellow-star {
+    font-size: 1.6em;
+    width: auto; // replace with actual width
+    height: auto;
+    /**/
+    ; // replace with actual height
+    display: inline-block;
+    color: yellow;
+    background-color: #e6e6e6;
+}
+
+.white-star {
+    background-color: #e6e6e6;
+    font-size: 1.6em;
+    width: auto; // replace with actual width
+    height: auto;
+    /**/
+    ; // replace with actual height
+    display: inline-block;
+    color: white;
+}
+
+.ui-menu .ui-menu-item {
+    background: white;
+}
+
+.dynamic-remove-fav td:not(:first-child):not(:last-child) {
+    padding-top: 15px;
+}
+
+#home {
+    position: relative;
+}
+
+#yahoochart {
+    position: relative;
+}

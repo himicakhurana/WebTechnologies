@@ -1,0 +1,249 @@
+<html>
+
+<head>
+    <title>Radio Stations</title>
+    <style>
+        body form {
+            text-align: center;
+        }
+    </style>
+    <!--
+<BODY>
+This is for USC disclaimer
+</BODY>
+-->
+    <script>
+        function getElemNumber(locs) {
+            var x = 0;
+            for (p = 0; p < locs.length; p++) {
+                if (locs.item(p).nodeType == ELEMENT_NODE) {
+                    x++;
+                }
+            }
+
+            return x;
+        }
+
+        function generateHTML(xmlDoc) {
+            ELEMENT_NODE = 1; // MS parser doesn't define Node.ELEMENT_NODE
+            root = xmlDoc.DocumentElement;
+
+            html_text = "<html><head><title>List of Stations</title><style>table{width:1000px;border: 3px solid black;margin:auto auto;}th, td {border: 1px solid black;}#td2  {background-size: 100% 100%;}td img{width:100%;}</style></head><body> ";
+            html_text += "<table >";
+            parserrors = xmlDoc.getElementsByTagName("parsererror");
+            if (undefined != parserrors && null != parserrors & parserrors.length > 0) {
+                if (xmlDoc.documentElement) {
+                    if (xmlDoc.documentElement.nodeName == "parsererror") {
+                        errorMsg = xmlDoc.documentElement.childNodes[0].nodeValue;
+                    }
+                } else {
+                    errorMsg = "XML Parsing Error!";
+                }
+                alert(errorMsg);
+                html_text = null;
+                return;
+            }
+
+            rows = xmlDoc.getElementsByTagName("Row");
+            headers = xmlDoc.getElementsByTagName("Header");
+            if (headers == null || headers == undefined || headers.length == 0) {
+                alert("No Headers Found");
+                html_text = null;
+                return;
+            }
+            rowNodeList = headers.item(0).childNodes;
+
+            html_text += "<tbody>";
+            html_text += "<tr>";
+            x = 0;
+            y = 0;
+            if (rows == undefined || rows == null || rows.length == 0) {
+                alert("No Radio Stations Found!");
+                html_text = null;
+                return;
+            } else {
+                // output the headers
+                for (i = 0; i < rowNodeList.length; i++) {
+                    if (rowNodeList.item(i).nodeType == ELEMENT_NODE) {
+                        header = getVal(rowNodeList.item(i));
+
+                        html_text += "<th nowrap>" + header + "</th>";
+                    }
+                }
+                html_text += "</tr>";
+                // output out the values
+                for (i = 0; i < rows.length; i++) //do for all rows
+                {
+                    rowNodeList = rows.item(i).childNodes; //get properties of a plane
+                    html_text += "<tr>"; //start a new row of the output table
+                    for (j = 0; j < rowNodeList.length; j++) {
+                        if (name == undefined || name == null || name == "")
+                            name = "Radio Image Logo";
+                        if (rowNodeList.item(j).nodeType == ELEMENT_NODE) {
+                            if (rowNodeList.item(j).nodeName == "Logo") { //handle images separately
+                                html_text += "<td id='#td2'   ><img src='" + getVal(rowNodeList.item(j)) + "'alt='" + name + "'></td>";
+                                /*               html_text += "<td class='Logo' id='td2' style='background-image: url(" + getVal(rowNodeList.item(j)) + ");'></td>";*/
+                                /*
+                                                                "+"' background-image: url('"+getVal(rowNodeList.item(j))+"');
+                                */
+                            } else {
+                                if (rowNodeList.item(j).nodeName == "Location") {
+                                    locs = rowNodeList.item(j).childNodes;
+
+                                    if (locs != undefined && locs != null && locs.length > 0) {
+                                        var elems = getElemNumber(locs);
+                                        liststart = "<ul>"
+                                        for (p = 0; p < locs.length; p++) {
+                                            if (locs.item(p).nodeType == ELEMENT_NODE) {
+
+                                                if (elems == 1) {
+                                                    if (locs.item(p).nodeName == "School") {
+                                                        alert("Invalid XML Structure: Location Tag invalid.School with no city ");
+                                                        html_text = null;
+                                                        return;
+                                                    }
+                                                }
+
+                                                liststart += "<li>" + getVal(locs.item(p)) + "</li>";
+                                            }
+                                        }
+
+                                        liststart += "</ul>"
+                                        if (locs.length > 0) {
+                                            html_text += "<td class='Location' nowrap>" + liststart + "</td>";
+
+                                        }
+
+                                    } else {
+
+                                        html_text += "<td class='Location' nowrap>" + "" + "</td>";
+
+                                    }
+
+
+                                } else {
+                                    if (rowNodeList.item(j).nodeName == "HomePage") {
+                                        val = getVal(rowNodeList.item(j));
+                                        if (val == undefined || val == null || val == "") {
+                                        html_text += "<td>" + "" + "</td>";
+
+                                        } else {
+
+                                            html_text += "<td nowrap class='" + rowNodeList.item(j).nodeName + "'><a href='"+val+"'>"+val+"</a></td>";
+                                        }
+                                    } else {
+                                        if (rowNodeList.item(j).nodeName == "CallSign") {
+                                            name = getVal(rowNodeList.item(j));
+
+
+                                        }
+                                        html_text += "<td nowrap class='" + rowNodeList.item(j).nodeName + "'>" + getVal(rowNodeList.item(j)) + "</td>";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    html_text += "</tr>";
+                }
+                html_text += "</tbody>";
+                html_text += "</table>";
+                html_text += "</body></html>";
+            }
+        }
+
+        function getVal(x) {
+            if (x != undefined || x != null) {
+                if (x.firstChild != undefined || x.firstChild != null) {
+                    if (x.firstChild.nodeValue != undefined || x.firstChild.nodeValue != null) {
+                        return x.firstChild.nodeValue;
+                    }
+
+                }
+            }
+            return "";
+        }
+
+
+
+        function viewXML() {
+            var URL = document.getElementById("xmlurl").value;
+            if (URL == undefined || URL == null || URL == "") {
+                alert("Please Enter URL");
+
+                return;
+            }
+            console.log(URL);
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else { // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open('get', URL, false);
+            xmlhttp.onreadystatechange = function () {
+                var status;
+                // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
+                if (xmlhttp.readyState == 4) {
+                    // `DONE`
+                    status = xmlhttp.status;
+                    if (status == 200) {
+
+                    } else {
+                        if (status == 404) {
+                            alert("File not found! Please enter valid path");
+                        }
+
+                        return;
+                    }
+                }
+            };
+
+            xmlhttp.send();
+            xmlDoc = xmlhttp.responseXML;
+            console.log(xmlDoc);
+            if (xmlDoc != null) {
+                if (window.ActiveXObject) //if IE, simply execute script (due to async prop).
+                {
+                    if (xmlDoc.parseError.errorCode != 0) {
+                        var myErr = xmlDoc.parseError;
+                        generateError(xmlDoc);
+                        hWin = window.open("", "Error", "height=300,width=340,scrollbars=yes");
+                        hWin.document.write(html_text);
+                        hWin.document.close();
+
+                    } else {
+                        generateHTML(xmlDoc);
+                        if (html_text != null) {
+                            hWin = window.open("", "List of Radio Stations", "width=1050,scrollbars=yes");
+                            hWin.document.write(html_text);
+                            hWin.document.close();
+                        }
+                    }
+                } else //else if FF, execute script once XML object has loaded
+                {
+                    xmlDoc.onload = generateHTML(xmlDoc);
+                    if (html_text != null) {
+                        hWin = window.open("", "List of Radio Stations", "width=1050,scrollbars=yes");
+                        hWin.document.write(html_text);
+                        hWin.document.close();
+
+                    }
+                }
+            } else {
+                console.log("404!");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1 align="center">Enter URL for Company List XML File</h1>
+    <form align="center" name="myform" method="POST" id="location">
+        <input type="text" name="URL" maxlength="255" size="100" value="" id="xmlurl" />
+        <br>
+        <br>
+        <input type="button" name="submit" value="Submit Query" onClick="viewXML()" />
+    </form>
+</body>
+
+</html>
